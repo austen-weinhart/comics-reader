@@ -1,5 +1,3 @@
-Feeds = new Mongo.Collection("feeds");
-
 ///////////////////////////////////////////////////
 // TASKS SCRIPTS
 ///////////////////////////////////////////////////
@@ -8,6 +6,7 @@ Tasks = new Mongo.Collection("tasks");
 
 if (Meteor.isClient) {
   // This code only runs on the client
+  Session.setDefault("currentFeed", "");
 
   Meteor.subscribe("tasks");
 
@@ -42,6 +41,9 @@ if (Meteor.isClient) {
           $ne: true
         }
       }).count();
+    },
+    selectedFeed: function(){
+      return Session.get("currentFeed");
     }
   });
 
@@ -60,6 +62,11 @@ if (Meteor.isClient) {
     },
     "change .hide-completed input": function(event) {
       Session.set("hideCompleted", event.target.checked);
+    },
+    'click a.feed-link': function(event){
+      event.preventDefault();
+      Session.set("currentFeed", event.target.href);
+
     }
   });
 
@@ -73,6 +80,12 @@ if (Meteor.isClient) {
     },
     "click .toggle-private": function() {
       Meteor.call("setPrivate", this._id, !this.private);
+    },
+    "click .source-link": function(event){
+      event.preventDefault();
+      console.log(event.target.href);
+      currentSource = event.target.href;
+      initialize();
     }
   });
 
@@ -153,3 +166,25 @@ if (Meteor.isServer) {
     });
   });
 }
+
+///////////////////////////////////////////////////
+// GOOGLE FEEDS API
+///////////////////////////////////////////////////
+
+// google.load("feeds", "1");
+//
+// function initialize() {
+//   var feed = new google.feeds.Feed("http://fastpshb.appspot.com/feed/1/fastpshb");
+//   feed.load(function(result) {
+//     if (!result.error) {
+//       var container = document.getElementById("feed");
+//       for (var i = 0; i < result.feed.entries.length; i++) {
+//         var entry = result.feed.entries[i];
+//         var div = document.createElement("div");
+//         div.appendChild(document.createTextNode(entry.title));
+//         container.appendChild(div);
+//       }
+//     }
+//   });
+// }
+// google.setOnLoadCallback(initialize);

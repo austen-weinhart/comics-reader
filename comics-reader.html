@@ -1,47 +1,64 @@
 <head>
   <title>Comics Reader</title>
+
+  <!-- GOOGLE FEEDS API -->
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load("feeds", "1");
+    var currentSource = "";
+
+    function initialize() {
+      var feed = new google.feeds.Feed(currentSource);
+      feed.load(function(result) {
+        feed.setResultFormat(google.feeds.Feed.XML_FORMAT);
+        if (!result.error) {
+          console.log("result", result);
+          var container = document.getElementById("feed");
+          for (var i = 0; i < result.feed.entries.length; i++) {
+            var entry = result.feed.entries[i];
+            var a = document.createElement("a");
+            a.appendChild(document.createTextNode(entry.title));
+            a.setAttribute("href", entry.link);
+            a.setAttribute("class", "feed-link")
+            container.appendChild(a);
+          }
+        }
+      });
+    }
+    google.setOnLoadCallback(initialize);
+  </script>
 </head>
 
 <body>
+
+  <!-- TESTING GOOGLE FEEDS API -->
+  <div id="feed"></div>
+
+
   <div class="container">
-    {{> loginButtons}}
-    <div id="feeds">
-      <div class="logo">
-        <h1>Comics Reader</h1>
-      </div>
-
-      <!-- {{> feedList}} -->
-    </div>
-    <div id="article">
-      <iframe frameborder="0" src="http://www.smbc-comics.com/"></iframe>
-      <!-- MAKE A LIST OF ALL THE FEEDS -->
-    </div>
-  </div>
-
-  <!-- <div class="container">
     <header>
       <h1>Comics Reader ({{incompleteCount}})</h1>
 
       <label class="hide-completed">
-        <input type="checkbox" checked="{{hideCompleted}}" />
-        Hide Completed Tasks
+        <input type="checkbox" checked="{{hideCompleted}}" /> Hide Read Comics
       </label>
 
-      {{> loginButtons}}
-
-      {{#if currentUser}}
-        <form class="new-task">
-          <input type="text" name="text" placeholder="Type to add new tasks" />
-        </form>
+      {{> loginButtons}} {{#if currentUser}}
+      <form class="new-task">
+        <input type="text" name="text" placeholder="Enter an RSS URL" />
+      </form>
       {{/if}}
     </header>
 
     <ul>
-      {{#each tasks}}
-        {{> task}}
-      {{/each}}
+      {{#each tasks}} {{> task}} {{/each}}
     </ul>
-  </div> -->
+  </div>
+  <!-- end of container -->
+
+
+  <iframe frameborder="0" src="{{selectedFeed}}"></iframe>
+
 </body>
 
 <!-- ======================================== -->
@@ -52,14 +69,12 @@
   <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
     <button class="delete">&times;</button>
 
-    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-     {{#if isOwner}}
-      <button class="toggle-private">
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" /> {{#if isOwner}}
+    <button class="toggle-private">
       {{#if private}} Private {{else}} Public {{/if}}
     </button>
     {{/if}}
 
-    <span class="text">
-      <strong>{{username}}</strong> - {{text}}</span>
+    <a href="{{text}}" class="source-link">{{text}}</a>
   </li>
 </template>
