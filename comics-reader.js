@@ -1,7 +1,14 @@
+Feeds = new Mongo.Collection("feeds");
+
+///////////////////////////////////////////////////
+// TASKS SCRIPTS
+///////////////////////////////////////////////////
+
 Tasks = new Mongo.Collection("tasks");
 
 if (Meteor.isClient) {
   // This code only runs on the client
+
   Meteor.subscribe("tasks");
 
   Template.body.helpers({
