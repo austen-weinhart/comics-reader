@@ -5,15 +5,17 @@
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
     google.load("feeds", "1");
-    var currentSource = "";
+    var currentSource;
+    var container;
 
     function initialize() {
+      document.getElementById("feed").innerHTML = "";
       var feed = new google.feeds.Feed(currentSource);
       feed.load(function(result) {
         feed.setResultFormat(google.feeds.Feed.XML_FORMAT);
         if (!result.error) {
           console.log("result", result);
-          var container = document.getElementById("feed");
+          container = document.getElementById("feed");
           for (var i = 0; i < result.feed.entries.length; i++) {
             var entry = result.feed.entries[i];
             var a = document.createElement("a");
@@ -22,6 +24,7 @@
             a.setAttribute("class", "feed-link")
             container.appendChild(a);
           }
+          console.dir(container);
         }
       });
     }

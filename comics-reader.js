@@ -84,7 +84,7 @@ if (Meteor.isClient) {
     "click .source-link": function(event){
       event.preventDefault();
       console.log(event.target.href);
-      currentSource = event.target.href;
+      currentSource = event.target.href
       initialize();
     }
   });
