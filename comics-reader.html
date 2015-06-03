@@ -18,11 +18,13 @@
           container = document.getElementById("feed");
           for (var i = 0; i < result.feed.entries.length; i++) {
             var entry = result.feed.entries[i];
-            var a = document.createElement("a");
-            a.appendChild(document.createTextNode(entry.title));
-            a.setAttribute("href", entry.link);
-            a.setAttribute("class", "feed-link")
-            container.appendChild(a);
+            var li = document.createElement("li");
+            // var a = document.createElement("a");
+            // a.appendChild(document.createTextNode(entry.title));
+            // a.setAttribute("href", entry.link);
+            li.setAttribute("class", "feed-link");
+            li.innerHTML = "<a href=" + entry.link +">" + entry.title + "</a>";
+            container.appendChild(li);
           }
           console.dir(container);
         }
@@ -35,7 +37,11 @@
 <body>
 
   <!-- TESTING GOOGLE FEEDS API -->
-  <div id="feed"></div>
+  <div>
+    <ul id="feed">
+      <li></li>
+    </ul>
+  </div>
 
 
   <div class="container">
