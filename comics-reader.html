@@ -11,6 +11,7 @@
     function initialize() {
       document.getElementById("feed").innerHTML = "";
       var feed = new google.feeds.Feed(currentSource);
+      feed.setNumEntries(10);
       feed.load(function(result) {
         feed.setResultFormat(google.feeds.Feed.XML_FORMAT);
         if (!result.error) {
@@ -19,11 +20,8 @@
           for (var i = 0; i < result.feed.entries.length; i++) {
             var entry = result.feed.entries[i];
             var li = document.createElement("li");
-            // var a = document.createElement("a");
-            // a.appendChild(document.createTextNode(entry.title));
-            // a.setAttribute("href", entry.link);
             li.setAttribute("class", "feed-link");
-            li.innerHTML = "<a href=" + entry.link +">" + entry.title + "</a>";
+            li.innerHTML = "<a href=" + entry.link + ">" + entry.title + "</a>";
             container.appendChild(li);
           }
           console.dir(container);
@@ -35,8 +33,8 @@
 </head>
 
 <body>
-
   <div class="container">
+    {{> loginButtons}}
     <header>
       <h1>Comics Reader ({{incompleteCount}})</h1>
 
@@ -51,22 +49,32 @@
         <input type="checkbox" checked="{{hideCompleted}}" /> Hide Read Comics
       </label>
 
-      {{> loginButtons}} {{#if currentUser}}
+      {{#if currentUser}}
       <form class="new-task">
         <input type="text" name="text" placeholder="Enter an RSS URL" />
       </form>
       {{/if}}
     </header>
-
-    <ul>
-      {{#each tasks}} {{> task}} {{/each}}
-    </ul>
   </div>
-  <!-- end of container -->
+  <!-- end of container  -->
+  <div class="row">
+    <div class="col-md-4">
 
+      <div class="container">
 
-  <iframe frameborder="0" src="{{selectedFeed}}"></iframe>
+        <ul>
+          {{#each tasks}} {{> task}} {{/each}}
+        </ul>
+      </div>
+      <!-- end of container -->
+    </div>
 
+    <div class="col-md-8">
+
+      <iframe frameborder="0" src="{{selectedFeed}}"></iframe>
+    </div>
+  </div>
+  <!-- end of row -->
 </body>
 
 <!-- ======================================== -->
@@ -78,7 +86,7 @@
     <button class="delete">&times;</button>
 
     <input type="checkbox" checked="{{checked}}" class="toggle-checked" /> {{#if isOwner}}
-    <button class="toggle-private">
+    <button class="btn btn-warning toggle-private">
       {{#if private}} Private {{else}} Public {{/if}}
     </button>
     {{/if}}

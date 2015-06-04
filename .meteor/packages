@@ -9,5 +9,5 @@ accounts-ui
 accounts-password
 jquery
 http
-semantic:ui
-anonyfox:scrape
+less
+twbs:bootstrap
