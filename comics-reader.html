@@ -36,17 +36,16 @@
 
 <body>
 
-  <!-- TESTING GOOGLE FEEDS API -->
-  <div>
-    <ul id="feed">
-      <li></li>
-    </ul>
-  </div>
-
-
   <div class="container">
     <header>
       <h1>Comics Reader ({{incompleteCount}})</h1>
+
+      <!-- PULLING GOOGLE FEEDS API -->
+      <div>
+        <ul id="feed">
+          <li></li>
+        </ul>
+      </div>
 
       <label class="hide-completed">
         <input type="checkbox" checked="{{hideCompleted}}" /> Hide Read Comics
