@@ -35,19 +35,30 @@
 <body>
   <div id="page">
     <div id="header">
-      <div id="logo">
-        <a href="#">
-          <img src="images/logo.png" width="340" height="135" alt="Comics Reader" />
-        </a>
+      <div class="row">
+        <div class="col-md-8">
+          <div id="logo">
+            <a href="~">
+              <img src="images/logo.png" width="340" height="135" alt="Comics Reader" />
+            </a>
+          </div>
+          <!-- END OF LOGO -->
+          <br>
+        </div>
+        <div class="col-md-4">
+          <br>
+          <button class="btn btn-warning login">{{> loginButtons}}</button>
+        </div>
       </div>
-      <!-- END OF LOGO -->
+      <!-- END OF ROW -->
     </div>
+
     <div id="content">
       <div id="top_banner">
         <div class="container">
-          {{> loginButtons}}
+
           <header>
-            <h1>Comics Reader ({{incompleteCount}})</h1>
+            <h1>My Comics ({{incompleteCount}})</h1>
 
             <!-- PULLING GOOGLE FEEDS API -->
             <div>
@@ -56,29 +67,26 @@
               </ul>
             </div>
 
-            <label class="hide-completed">
-              <input type="checkbox" checked="{{hideCompleted}}" /> Hide Read Comics
-            </label>
-
             {{#if currentUser}}
             <form class="new-task">
               <input type="text" name="text" placeholder="Enter an RSS URL" />
             </form>
             {{/if}}
           </header>
+          <br>
         </div>
         <!-- end of container  -->
       </div>
       <!-- END OF TOP BANNER -->
     </div>
     <!-- END OF CONTENT -->
-
+    <br>
     <div id="content">
       <div class="row">
         <div class="col-md-4">
 
           <div class="container">
-
+            <br>
             <ul>
               {{#each tasks}} {{> task}} {{/each}}
             </ul>
@@ -110,7 +118,7 @@
     <button class="delete">&times;</button>
 
     <input type="checkbox" checked="{{checked}}" class="toggle-checked" /> {{#if isOwner}}
-    <button class="btn btn-warning toggle-private">
+    <button class="btn btn-primary toggle-private">
       {{#if private}} Private {{else}} Public {{/if}}
     </button>
     {{/if}}

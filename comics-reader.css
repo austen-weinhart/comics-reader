@@ -12,16 +12,12 @@ h1 {
   font-family: "Komika Text Kaps";
 }
 
-/*#page {
+#page {
   margin: 0px auto;
   width: 960px;
-}*/
+}
 
 #content {
-  /*width: 960px;
-  height: 400px;*/
-  /* Temporal */
-  float: left;
   background-color:#EA9403;
   background: -webkit-linear-gradient(#EA9403, #FFC501);
   /* For Safari 5.1 to 6.0 */
@@ -47,7 +43,25 @@ h1 {
   padding-top: 32px;
   padding-left: 70px;
 }
+
 iframe {
   width: 100%;
   height: 800px;
+}
+
+.login {
+  float: right;
+}
+
+#login-dropdown-list {
+  background-color:#EA9403;
+  background: -webkit-linear-gradient(#EA9403, #FFC501);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#EA9403, #FFC501);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#EA9403, #FFC501);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#EA9403, #FFC501);
+  /* Standard syntax */
+  border-radius: 5px;
 }
