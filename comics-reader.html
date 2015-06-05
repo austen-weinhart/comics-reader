@@ -33,62 +33,72 @@
 </head>
 
 <body>
-  <!-- COMICS TEMPLATE -->
   <div id="page">
     <div id="header">
-      Header
+      <div id="logo">
+        <a href="#">
+          <img src="images/logo.png" width="340" height="135" alt="Comics Reader" />
+        </a>
+      </div>
+      <!-- END OF LOGO -->
     </div>
     <div id="content">
-      Content
+      <div id="top_banner">
+        <div class="container">
+          {{> loginButtons}}
+          <header>
+            <h1>Comics Reader ({{incompleteCount}})</h1>
+
+            <!-- PULLING GOOGLE FEEDS API -->
+            <div>
+              <ul id="feed">
+                <li></li>
+              </ul>
+            </div>
+
+            <label class="hide-completed">
+              <input type="checkbox" checked="{{hideCompleted}}" /> Hide Read Comics
+            </label>
+
+            {{#if currentUser}}
+            <form class="new-task">
+              <input type="text" name="text" placeholder="Enter an RSS URL" />
+            </form>
+            {{/if}}
+          </header>
+        </div>
+        <!-- end of container  -->
+      </div>
+      <!-- END OF TOP BANNER -->
     </div>
+    <!-- END OF CONTENT -->
+
+    <div id="content">
+      <div class="row">
+        <div class="col-md-4">
+
+          <div class="container">
+
+            <ul>
+              {{#each tasks}} {{> task}} {{/each}}
+            </ul>
+          </div>
+          <!-- end of container -->
+        </div>
+
+        <div class="col-md-8">
+
+          <iframe frameborder="0" src="{{selectedFeed}}"></iframe>
+        </div>
+      </div>
+      <!-- end of row -->
+    </div>
+    <!-- END OF CONTENT -->
     <div id="footer">
-      Footer
     </div>
+    <!-- END OF FOOTER -->
   </div>
-
-  <!-- TASKS TEMPLATE -->
-  <div class="container">
-    {{> loginButtons}}
-    <header>
-      <h1>Comics Reader ({{incompleteCount}})</h1>
-
-      <!-- PULLING GOOGLE FEEDS API -->
-      <div>
-        <ul id="feed">
-          <li></li>
-        </ul>
-      </div>
-
-      <label class="hide-completed">
-        <input type="checkbox" checked="{{hideCompleted}}" /> Hide Read Comics
-      </label>
-
-      {{#if currentUser}}
-      <form class="new-task">
-        <input type="text" name="text" placeholder="Enter an RSS URL" />
-      </form>
-      {{/if}}
-    </header>
-  </div>
-  <!-- end of container  -->
-  <div class="row">
-    <div class="col-md-4">
-
-      <div class="container">
-
-        <ul>
-          {{#each tasks}} {{> task}} {{/each}}
-        </ul>
-      </div>
-      <!-- end of container -->
-    </div>
-
-    <div class="col-md-8">
-
-      <iframe frameborder="0" src="{{selectedFeed}}"></iframe>
-    </div>
-  </div>
-  <!-- end of row -->
+  <!-- END OF PAGE -->
 </body>
 
 <!-- ======================================== -->

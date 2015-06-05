@@ -1,39 +1,52 @@
 /* CSS declarations go here */
-/*Common*/
-body{
-    background-color:#000;
-    background-image:url("images/bg-body.jpg");
-    background-position:center top;
-    background-repeat:no-repeat;
+
+body {
+    background-color: #000;
+    background-image: url("images/bg-body.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    font-family: "Komika Text";
 }
 
-/*Containers*/
-#page{
-   margin:0px auto;
-   width:960px;
-}
-#header{
-   width:960px;
-   height:180px;
-   float:left;
-   background-color:#666;
-}
-#content{
-   width:960px;
-   height:400px;/* Temporal */
-   float:left;
-   background-color:#FCC;
-}
-#footer{
-   width:960px;
-   height:250px;/* Temporal */
-   float:left;
-
-   background-image:url("images/bg-footer.jpg");
-   background-position:top center;
-   background-repeat:no-repeat;
+h1 {
+  font-family: "Komika Text Kaps";
 }
 
+/*#page {
+  margin: 0px auto;
+  width: 960px;
+}*/
+
+#content {
+  /*width: 960px;
+  height: 400px;*/
+  /* Temporal */
+  float: left;
+  background-color:#EA9403;
+  background: -webkit-linear-gradient(#EA9403, #FFC501);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#EA9403, #FFC501);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#EA9403, #FFC501);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#EA9403, #FFC501);
+  /* Standard syntax */
+  border-radius: 5px;
+}
+
+#footer {
+  width: 960px;
+  height: 250px;
+  /* Temporal */
+  float: left;
+  background-image: url("images/bg-footer.jpg");
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+#logo {
+  padding-top: 32px;
+  padding-left: 70px;
+}
 iframe {
   width: 100%;
   height: 800px;
