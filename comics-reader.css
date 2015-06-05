@@ -46,7 +46,7 @@ h1 {
 
 iframe {
   width: 100%;
-  height: 800px;
+  height: 500px;
 }
 
 .login {
@@ -64,4 +64,15 @@ iframe {
   background: linear-gradient(#EA9403, #FFC501);
   /* Standard syntax */
   border-radius: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+#viewer {
+  margin: 0 auto;
+  width: 90%;
 }

@@ -12,6 +12,7 @@
       document.getElementById("feed").innerHTML = "";
       var feed = new google.feeds.Feed(currentSource);
       feed.setNumEntries(10);
+      feed.includeHistoricalEntries();
       feed.load(function(result) {
         feed.setResultFormat(google.feeds.Feed.XML_FORMAT);
         if (!result.error) {
@@ -60,30 +61,18 @@
           <header>
             <h1>My Comics ({{incompleteCount}})</h1>
 
-            <!-- PULLING GOOGLE FEEDS API -->
-            <div>
-              <ul id="feed">
-                <li></li>
-              </ul>
-            </div>
-
             {{#if currentUser}}
             <form class="new-task">
               <input type="text" name="text" placeholder="Enter an RSS URL" />
             </form>
             {{/if}}
           </header>
-          <br>
         </div>
         <!-- end of container  -->
       </div>
       <!-- END OF TOP BANNER -->
-    </div>
-    <!-- END OF CONTENT -->
-    <br>
-    <div id="content">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
 
           <div class="container">
             <br>
@@ -94,12 +83,23 @@
           <!-- end of container -->
         </div>
 
-        <div class="col-md-8">
-
-          <iframe frameborder="0" src="{{selectedFeed}}"></iframe>
+        <div class="col-md-6">
+          <!-- PULLING GOOGLE FEEDS API -->
+          <div>
+            <ul id="feed">
+              <li></li>
+            </ul>
+          </div>
         </div>
       </div>
       <!-- end of row -->
+      <br>
+      <br>
+      <div id="viewer">
+        <iframe frameborder="0" src="{{selectedFeed}}"></iframe>
+      </div>
+      <br>
+      <br>
     </div>
     <!-- END OF CONTENT -->
     <div id="footer">
@@ -109,20 +109,12 @@
   <!-- END OF PAGE -->
 </body>
 
-<!-- ======================================== -->
-<!-- TASK LIST TEMPLATES -->
-<!-- ======================================== -->
-
 <template name="task">
   <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
-    <button class="delete">&times;</button>
 
-    <input type="checkbox" checked="{{checked}}" class="toggle-checked" /> {{#if isOwner}}
-    <button class="btn btn-primary toggle-private">
-      {{#if private}} Private {{else}} Public {{/if}}
-    </button>
-    {{/if}}
+    <button class="delete btn btn-danger btn-xs">-</button>
 
     <a href="{{text}}" class="source-link">{{text}}</a>
+
   </li>
 </template>
